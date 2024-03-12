@@ -1,22 +1,49 @@
 using BlogDotNet8.Data;
 using BlogDotNet8.Models;
+using BlogDotNet8.Services;
+using BlogDotNet8.Services.Interfaces;
+using BlogDotNet8.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseNpgsql(connectionString));
+
+//builder.Services.AddDefaultIdentity<BlogUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-builder.Services.AddRazorPages();
 
 //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
 //    .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddIdentity<BlogUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddDefaultUI()
+    .AddDefaultTokenProviders()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+
+//Register custom Dataservice class
+builder.Services.AddScoped<DataService>();
+//register Search service
+builder.Services.AddScoped<BlogSearchService>();
+
+//Register a preconfigured instance of MailSettings Class 
+//builder.Services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+builder.Configuration.GetSection("MailSettings");
+builder.Services.AddScoped<IBlogEmailSender, EmailService>();
+
+//Register Image Service
+builder.Services.AddScoped<IImageService, BasicImageService>();
+
+//REgister Slug Service
+builder.Services.AddScoped<ISlugService, BasicSlugService>();
+
 
 var app = builder.Build();
 
