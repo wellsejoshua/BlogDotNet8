@@ -1,4 +1,8 @@
-﻿@model IEnumerable<BlogDotNet8.Models.Blog>
+﻿﻿@using BlogDotNet8.Services.Interfaces
+@using BlogDotNet8.Enums
+@inject IImageService imageService
+
+@model IEnumerable<BlogDotNet8.Models.Blog>
 
 @{
     ViewData["Title"] = "Index";

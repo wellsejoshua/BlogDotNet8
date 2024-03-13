@@ -58,19 +58,19 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Post.Abstract)
-        </dd>
+        </dd class>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.BlogUser)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.BlogUser.Id)
-        </dd>
+        </dd class>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Moderator)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Moderator.Id)
-        </dd>
+        </dd class>
     </dl>
     
     <form asp-action="Delete">
