@@ -69,13 +69,14 @@ namespace BlogDotNet8.Services
             //step one creates a new instance of Bloguser
             var adminUser = new BlogUser()
             {
-                Email = "wellsejoshua@gmail.com",
-                UserName = "wellsejoshua@gmail.com",
+                Email = "codedbywells@gmail.com",
+                UserName = "codedbywells@gmail.com",
                 FirstName = "Joshua",
                 LastName = "Wells",
                 DisplayName = "Josh The Admin",
                 PhoneNumber = "(281) 217-1876",
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                
             };
 
             //step 2 use UserManager to create a new user that is defined by the adminUser variable

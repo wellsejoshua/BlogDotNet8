@@ -46,6 +46,10 @@ builder.Services.AddScoped<ISlugService, BasicSlugService>();
 
 
 var app = builder.Build();
+//calls dataservice to seed data and roles 
+var scope = app.Services.CreateScope().ServiceProvider.GetRequiredService<DataService>();
+await scope.ManageDataAsync();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
