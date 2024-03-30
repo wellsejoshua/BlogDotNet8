@@ -1,4 +1,5 @@
 using BlogDotNet8.Data;
+using BlogDotNet8.Helpers;
 using BlogDotNet8.Models;
 using BlogDotNet8.Services;
 using BlogDotNet8.Services.Interfaces;
@@ -47,9 +48,12 @@ builder.Services.AddScoped<ISlugService, BasicSlugService>();
 
 
 var app = builder.Build();
-//calls dataservice to seed data and roles 
-var scope = app.Services.CreateScope().ServiceProvider.GetRequiredService<DataService>();
-await scope.ManageDataAsync();
+//calls dataservice to seed data and roles for local
+//var scope = app.Services.CreateScope().ServiceProvider.GetRequiredService<DataService>();
+//await scope.ManageDataAsync();
+
+var scope = app.Services.CreateScope();
+await DataHelper.ManageDataAsync(scope.ServiceProvider);
 
 
 // Configure the HTTP request pipeline.
