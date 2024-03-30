@@ -92,7 +92,7 @@ const swalWithDarkButton = Swal.mixin({
   customClass: {
     confirmButton: 'btn btn-danger btn-sm d-grid btn-outline-dark'
   },
-  imageUrl: '/img/oops-orange.jpg',
+  imageUrl: '/img/oops-orange.png',
   timer: 5000,
   buttonsStyling: false
 

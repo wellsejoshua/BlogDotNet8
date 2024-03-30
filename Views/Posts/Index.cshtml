@@ -1,5 +1,5 @@
 ﻿@using BlogDotNet8.Services.Interfaces
-
+@using BlogDotNet8.Enums
 @inject IImageService imageservice
 @model IEnumerable<BlogDotNet8.Models.Post>
 
@@ -8,10 +8,11 @@
 }
 
 <h1>@ViewData["Title"]</h1>
-
+ @if (User.IsInRole(nameof(BlogRole.Administrator))){     
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+ }
 <table class="table">
     <thead>
         <tr>

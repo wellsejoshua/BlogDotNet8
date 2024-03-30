@@ -15,6 +15,7 @@ using BlogDotNet8.Models;
 using BlogDotNet8.Services.Interfaces;
 using BlogDotNet8.Services;
 using BlogDotNet8.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BlogSecond.Controllers
 {
@@ -170,6 +171,7 @@ namespace BlogSecond.Controllers
         }
 
         // GET: Posts/Create
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "Name");
@@ -256,6 +258,7 @@ namespace BlogSecond.Controllers
         }
 
         // GET: Posts/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -363,6 +366,7 @@ namespace BlogSecond.Controllers
         }
 
         // GET: Posts/Delete/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

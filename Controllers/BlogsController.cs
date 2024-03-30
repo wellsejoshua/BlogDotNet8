@@ -153,7 +153,7 @@ namespace BlogDotNet8.Controllers
         }
 
         // GET: Blogs/Delete/5
-        //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
