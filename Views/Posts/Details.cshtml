@@ -14,12 +14,12 @@
 
 <article>
     <div class="row">
-        <div class="col-9 border-right">
+        <div class="col-md-9 border-right">
             @Html.Raw(Model.Post.Content)
         </div>
-        <div class="col-3 text-center font-weight-bold h6">
+        <div class="col-md-3 text-center font-weight-bold h6">
             <div class="card">
-                <img class="card-img-top" src="/images/tags.png" alt="Tags...">
+                <img class="card-img-top  img-fluid" src="@imageService.DecodeImage(Model.Post.ImageData, Model.Post.ContentType)" alt="Tags...">
                 <div class="card-body">
                     <h4 class="card-title">SYSTEM TAGS</h4>
                     <div class="tagView">

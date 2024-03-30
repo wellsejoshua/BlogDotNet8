@@ -55,7 +55,7 @@ namespace BlogDotNet8.Controllers
         }
 
         // GET: Blogs/Create
-        //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             return View();
@@ -70,7 +70,7 @@ namespace BlogDotNet8.Controllers
         {
             if (ModelState.IsValid)
             {
-                blog.Created = DateTime.Now;
+                blog.Created = DateTime.Now.ToUniversalTime();
                 blog.BlogUserId = _userManager.GetUserId(User);
                 blog.ImageData = await _imageService.EncodeImageAsync(blog.Image);
                 blog.ContentType = _imageService.ContentType(blog.Image);
@@ -85,7 +85,7 @@ namespace BlogDotNet8.Controllers
         }
 
         // GET: Blogs/Edit/5
-        //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -106,7 +106,7 @@ namespace BlogDotNet8.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] Blog blog, IFormFile newImage)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] Blog blog, IFormFile? newImage)
         {
             if (id != blog.Id)
             {
@@ -118,7 +118,7 @@ namespace BlogDotNet8.Controllers
                 try
                 {
                     var newBlog = await _context.Blogs.FindAsync(blog.Id);
-                    newBlog.Updated = DateTime.Now;
+                    newBlog.Updated = DateTime.Now.ToUniversalTime();
                     if (newBlog.Name != blog.Name)
                     {
                         newBlog.Name = blog.Name;
