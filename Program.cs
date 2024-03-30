@@ -34,8 +34,9 @@ builder.Services.AddScoped<DataService>();
 builder.Services.AddScoped<BlogSearchService>();
 
 //Register a preconfigured instance of MailSettings Class 
-//builder.Services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
-builder.Configuration.GetSection("MailSettings");
+
+builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
+
 builder.Services.AddScoped<IBlogEmailSender, EmailService>();
 
 //Register Image Service

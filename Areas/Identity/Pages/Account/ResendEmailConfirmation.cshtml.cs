@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using BlogDotNet8.Services.Interfaces;
 
 namespace BlogDotNet8.Areas.Identity.Pages.Account
 {
@@ -21,9 +22,9 @@ namespace BlogDotNet8.Areas.Identity.Pages.Account
     public class ResendEmailConfirmationModel : PageModel
     {
         private readonly UserManager<BlogUser> _userManager;
-        private readonly IEmailSender _emailSender;
+        private readonly IBlogEmailSender _emailSender;
 
-        public ResendEmailConfirmationModel(UserManager<BlogUser> userManager, IEmailSender emailSender)
+        public ResendEmailConfirmationModel(UserManager<BlogUser> userManager, IBlogEmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;
@@ -82,7 +83,7 @@ namespace BlogDotNet8.Areas.Identity.Pages.Account
                 "Confirm your email",
                 $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-            ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
+            ModelState.AddModelError(string.Empty, "If there is a registered account with the email entered, a verification email has been sent. Please check your email.");
             return Page();
         }
     }
