@@ -16,7 +16,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
-
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 //builder.Services.AddDefaultIdentity<BlogUser>(options => options.SignIn.RequireConfirmedAccount =commit true).AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
