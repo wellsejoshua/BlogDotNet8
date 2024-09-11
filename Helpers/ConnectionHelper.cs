@@ -6,7 +6,9 @@ namespace BlogDotNet8.Helpers
     {
         public static string GetConnectionString(IConfiguration configuration)
         {
-            var connectionString = configuration.GetSection("pgSettings")["pgConnection"];
+            //var connectionString = configuration.GetSection("pgSettings")["pgConnection"];
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+
             //use name of whatever environmet variable is given by hosting
             var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
 
